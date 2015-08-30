@@ -1,0 +1,139 @@
+<div class="chat">
+  <div class="bar bar-header bar-positive">
+    <h1 class="title">{{nick}}</h1>
+  </div><br>
+  <ion-content class="messages-box" delegate-handle="chatScroll" >
+      <div class="messages" >
+
+          <li class="message" ng-repeat="message in messages[nick]" ng-class="{'avatar_right':message.nick != auth_user.nick}">
+            <img ng-src="{{URL+message.pDir}}">
+              <!-- <h2>{{message.enviado_por}}</h2> -->
+            <p>{{message.msg}}</p>
+          </li>
+
+      </div>
+    
+        
+  </ion-content>
+  <div class="bar bar-footer bar-balanced chat-input-box">
+      <button class="actions"><i class="icon ion-plus-round"></i></button>
+
+        <input type="text" placeholder="Mensaje..." ng-enter="sendMessage(chat_message)" id="msg" ng-model="chat_message">
+
+      <button class="send" ng-click="sendMessage(chat_message)">
+        <i class="icon ion-paper-airplane"></i>
+      </button>
+  </div>
+</div>
+
+<style>
+
+  .messages-box{
+    background-color: #687586;
+
+    height:94vh;
+  }
+  .chat-input-box{
+    /*position: relative;*/
+  }
+  .chat-input-box .actions,.chat-input-box input,.chat-input-box .send{
+    display: inline-block;
+    position: absolute;
+  }
+  .chat-input-box .actions{
+    border: none;
+    background-color: #0DA9C5;
+    color: white;
+    width: 10%;
+    font-size: 30px;
+    top: -1px;
+    z-index: 9;
+    left: 0;
+  }
+  .chat-input-box input{
+    left: 10%;
+    width: 80%;
+    padding: 10px;
+  }
+  .chat-input-box .send{
+    background-color: #0DA9C5;
+    border: none;
+    color: white;
+    right: 0px;
+    position: absolute;
+    width: 10%;
+    font-size: 30px;
+    box-shadow: 0 4px 9px #000000;
+    top: -1px;
+  }
+  .chat .messages {
+    background: #687586;
+    padding-top: 15%;
+  }
+  .chat .messages .message{
+    list-style: none;
+    margin: 4px 0;
+    min-height: 50px;
+    position: relative;
+  }
+
+  .chat .messages .message img{
+    position: absolute;
+    top: -8px;
+    left: 10px;
+    max-width: 50px;
+    max-height: 50px;
+    width: 100%;
+    height: auto;
+    border-radius: 50%;
+    vertical-align: top;
+    border: 3px solid white;
+  }
+  .chat .messages .message p{
+    padding: 6px 3px;
+    vertical-align: middle;
+    border-radius: 5px;
+    background: #ffffff;
+    position: absolute;
+    left: 20%;
+    max-width: 77%;
+    display: block;
+    min-height: auto;
+  }
+  .chat .messages .message p:after{
+    content:'';
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 3px 10px 7px 0;
+    border-color: transparent white transparent transparent;
+    position: absolute;
+    left: -8px;
+  }
+  .chat .messages .message.avatar_right p{
+    right: 20%;
+    left: initial;
+    max-width: 77%;
+  }
+  .chat .messages .message.avatar_right p:after{
+    /*content:'';
+    position: absolute;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 3px 0 7px 10px;
+    border-color: transparent transparent transparent #ffffff;*/
+    top:13%;
+    left: 100%;
+    -webkit-transform: rotateY(180deg);
+       -moz-transform: rotateY(180deg);
+        -ms-transform: rotateY(180deg);
+         -o-transform: rotateY(180deg);
+            transform: rotateY(180deg);
+  }
+
+  .chat .messages .message.avatar_right img{
+    margin-left: 81%;
+
+  }
+</style>
