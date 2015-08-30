@@ -14,6 +14,15 @@ angular.module('fotogena', ['ionic','ngMaterial','ngCordova','luegg.directives']
 
 	$rootScope.logged = false;
 
+	$rootScope.toggleMenu = a => {
+		if (a === 'right')
+			$ionicSideMenuDelegate.toggleLeft(true);
+		else if (a === 'left')
+			$ionicSideMenuDelegate.toggleRight(true);
+		else
+			console.log('¿sidemenu?')
+	}
+
 	notifi.on('notific1', a =>{
 
 		switch(a.type){
@@ -138,6 +147,8 @@ angular.module('fotogena', ['ionic','ngMaterial','ngCordova','luegg.directives']
 
 			$rootScope.auth_user = a
 
+			$rootScope.auth_user.cod = '5487'+a.cod;
+
 			console.log($rootScope.auth_user)
 
 			localStorage['auth_user'] = JSON.stringify(a)
@@ -243,10 +254,6 @@ angular.module('fotogena', ['ionic','ngMaterial','ngCordova','luegg.directives']
 
 					$rootScope.afterLogged();
 
-
-			  // $timeout(function() {
-			  //    myPopup.close(); //close the popup after 3 seconds for some reason
-			  // }, 3000);
 			}
     	}
 		)
@@ -301,7 +308,7 @@ angular.module('fotogena', ['ionic','ngMaterial','ngCordova','luegg.directives']
     
     .state('profile-me', {
       url: '/profile-me',
-      templateUrl: './templates/profile-me.html'
+      templateUrl: './templates/profile/profile-me.html',
     })
 
     .state('chat',{

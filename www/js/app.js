@@ -11,6 +11,10 @@ angular.module('fotogena', ['ionic', 'ngMaterial', 'ngCordova', 'luegg.directive
 
 	$rootScope.logged = false;
 
+	$rootScope.toggleMenu = function (a) {
+		if (a === 'right') $ionicSideMenuDelegate.toggleLeft(true);else if (a === 'left') $ionicSideMenuDelegate.toggleRight(true);else console.log('¿sidemenu?');
+	};
+
 	notifi.on('notific1', function (a) {
 
 		switch (a.type) {
@@ -123,6 +127,8 @@ angular.module('fotogena', ['ionic', 'ngMaterial', 'ngCordova', 'luegg.directive
 
 			$rootScope.auth_user = a;
 
+			$rootScope.auth_user.cod = '5487' + a.cod;
+
 			console.log($rootScope.auth_user);
 
 			localStorage['auth_user'] = JSON.stringify(a);
@@ -203,10 +209,6 @@ angular.module('fotogena', ['ionic', 'ngMaterial', 'ngCordova', 'luegg.directive
 				localStorage['cookie'] = 'node=' + a.cook + '--';
 
 				$rootScope.afterLogged();
-
-				// $timeout(function() {
-				//    myPopup.close(); //close the popup after 3 seconds for some reason
-				// }, 3000);
 			}
 		});
 	};
@@ -250,7 +252,7 @@ angular.module('fotogena', ['ionic', 'ngMaterial', 'ngCordova', 'luegg.directive
 		templateUrl: './templates/signup.html'
 	}).state('profile-me', {
 		url: '/profile-me',
-		templateUrl: './templates/profile-me.html'
+		templateUrl: './templates/profile/profile-me.html'
 	}).state('chat', {
 		url: '/chat/:nick/:id_user',
 		templateUrl: './templates/chat/layout.html',
