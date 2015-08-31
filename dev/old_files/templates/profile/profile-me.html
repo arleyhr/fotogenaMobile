@@ -1,0 +1,22 @@
+<ion-view title="Mi Perfil">
+    <ion-content padding="false">
+        <header class="profile-top">
+            <img class="banner" ng-src="{{URL+auth_user.dirImgBanner}}" alt="">
+            <img class="profile" ng-src="{{URL+auth_user.pDir}}" alt="" style="border-color:{{auth_user.color_leyenda}}">
+            <h3 class="name" style="text-shadow:0 0 10px {{auth_user.color_leyenda}}">
+                @{{auth_user.nick}}
+                <span>
+                    {{auth_user.nombres}} {{auth_user.apellidos}}
+                </span>
+            </h3>
+            <legend class="legend" style="text-shadow:0 0 10px {{auth_user.color_leyenda}}">{{auth_user.leyenda}}</legend>
+        </header>
+
+        <div class="button-bar">
+            <button class="button button-stable button-block  icon-left ion-android-image">1</button>
+            <button class="button button-stable button-block  icon-left ion-android-contact">2</button>
+            <button class="button button-stable button-block  icon-left ion-android-contacts">3</button>
+        </div>
+    </ion-content>
+</ion-view>
+<link rel="stylesheet" href="./templates/profile/style.css">

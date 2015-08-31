@@ -1,0 +1,21 @@
+<ion-view title="Login">
+    <ion-content padding="true" scroll="false" class="has-header">
+        <form ng-submit="logear()">
+            <h1>Fotogena</h1>
+            <ion-list>
+                <label class="item item-input">
+                    <span class="input-label">Usuario o Correo</span>
+                    <input type="text" placeholder="Usuario o Correo" ng-model="login_data.user">
+                </label>
+                <label class="item item-input">
+                    <span class="input-label">Contraseña</span>
+                    <input type="password" placeholder="Contraseña" ng-model="login_data.password">
+                </label>
+            </ion-list>
+            <div class="spacer" style="height: 40px;"></div>
+            <button class="button button-stable button-block ">Login</button>
+            <button class="button button-positive button-clear button-block" ui-sref="signup">O ¡Registrate!</button>
+
+        </form>
+    </ion-content>
+</ion-view>

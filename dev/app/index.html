@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang='en' data-ng-app='fotogena'>
+  <head>
+    <title>fotogena</title>
+    <meta name='viewport' content='width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes'>
+    <!-- inject:head:js -->
+    <!-- endinject -->
+    <!-- inject:html -->
+    <!-- endinject -->
+    <!-- bower:css -->
+    <!-- endbower -->
+    <!-- inject:css -->
+    <!-- endinject -->
+  </head>
+  <body ng-controller="AppCtrl">
+    <ion-side-menus>
+        <ion-side-menu side="left">
+          <ion-header-bar class="bar-dark">
+            <h1 class="title">Notificaciones</h1>
+          </ion-header-bar>
+        </ion-side-menu>
+        
+        <ion-side-menu-content>
+          <div data-ui-view>
+
+          </div>
+        </ion-side-menu-content>
+
+        <ion-side-menu side="right">
+          <ion-header-bar class="bar-dark">
+            <h1 class="title">Conectados</h1>
+          </ion-header-bar>
+           <ion-content>
+            <div class="list">
+                <a class="item item-avatar" ng-click="goToChat(conectado)" ng-repeat="conectado in conectados | orderBy:'nick'" ng-if="auth_user.nick != conectado.nick">
+                  <img ng-src="{{URL+conectado.img}}">
+                  <h2>{{conectado.nick}}</h2>
+                  <p>{{conectado.fullName}}</p>
+                </a>
+            </div>
+           </ion-content>
+        </ion-side-menu>
+      </ion-side-menus>
+    <script src="http://fotogena.co:3000/socket.io/socket.io.js"></script>
+
+    <!-- bower:js -->
+    <!-- endbower -->
+    <!-- inject:js -->
+    <!-- endinject -->
+  </body>
+</html>
