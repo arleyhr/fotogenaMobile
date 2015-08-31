@@ -1,4 +1,10 @@
 {
   "name": "fotogena",
-  "app_id": ""
+  "app_id": "",
+  "documentRoot": "dev/build/app",
+  "createDocumentRoot": "dev/build/app",
+  "watchPatterns": [
+    "dev/build/app/js/*",
+    "!dev/build/app/css/**/*"
+  ]
 }
