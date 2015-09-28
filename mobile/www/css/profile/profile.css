@@ -1,0 +1,35 @@
+.my-profile .profile-top {
+  color: #fff;
+  position: relative;
+  width: 100%;
+}
+.my-profile .profile-top .banner {
+  width: 100%;
+}
+.my-profile .profile-top .profile {
+  border-style: solid;
+  border-width: 2px;
+  position: absolute;
+  border-radius: 50%;
+  left: 5%;
+  top: 10%;
+  width: 25%;
+}
+.my-profile .profile-top .legend {
+  color: #fff;
+  border: none;
+  line-height: normal;
+  left: 5%;
+  bottom: 10%;
+  position: absolute;
+  width: 90%;
+}
+.my-profile .profile-top .name {
+  color: #fff;
+  position: absolute;
+  left: 32%;
+  top: 5%;
+}
+.my-profile .profile-top .name span {
+  display: block;
+}
