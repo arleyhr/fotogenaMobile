@@ -1,0 +1,42 @@
+<div class="chat">
+  <div class="bar bar-header bar-positive">
+    <h1 class="title">{{chat.nick}}</h1>
+  </div><br>
+  <ion-content class="messages-box" delegate-handle="chatScroll" >
+      <div class="messages" >
+
+          <li class="message" ng-repeat="message in messages[chat.nick]" ng-class="{'avatar_right':message.nick != auth_user.nick}">
+            <img ng-src="{{URL+message.pDir}}">
+              <!-- <h2>{{message.enviado_por}}</h2> -->
+            <p>{{message.msg}}</p>
+          </li>
+
+
+          <li class="message avatar_right typing" >
+            <img ng-src="{{URL+tempChatImages[chat.nick]}}">
+              <!-- <h2>{{message.enviado_por}}</h2> -->
+            <p>Typing...</p>
+          </li>
+
+      </div>
+        
+  </ion-content>
+  <div class="bar bar-footer bar-balanced chat-input-box">
+      <button class="actions"><i class="icon ion-plus-round"></i></button>
+
+        <input type="text" placeholder="Mensaje..." ng-enter="chat.sendMessage()" id="msg" ng-model="chat.message" ng-change="chat.onTyping()" ng-model-options="{debounce: 750}">
+
+      <button class="send" ng-click="chat.sendMessage()">
+        <i class="icon ion-paper-airplane"></i>
+      </button>
+  </div>
+</div>
+
+<style>
+  .chat .messages-box div.scroll:first-child{
+      background: #687586 url({{URL+chat.backgroundImage}});
+  }
+  .chat .messages-box .messages{
+      background: rgba(0,0,0,.3);
+  }
+</style>

@@ -1,0 +1,135 @@
+pLeftColor = #d2ff52
+pRightColor = #34C6E0
+.chat
+    .messages-box
+        height 94vh
+    .chat-input-box
+        .actions
+            border none
+            background-color #0DA9C5
+            color white
+            width 10%
+            font-size 30px
+            top -1px
+            z-index 9
+            left 0
+        input
+            left 10%
+            width 80%
+            padding 10px
+        .send
+            background-color #0DA9C5
+            border none
+            color white
+            right 0px
+            position absolute
+            width 10%
+            font-size 30px
+            box-shadow 0 4px 9px #000000
+            top -1px
+    .messages
+        background #687586
+        padding-top 15%
+        .message
+            list-style none
+            margin 4px 0
+            min-height 50px
+            position relative
+            img
+                position absolute
+                top -8px
+                left 10px
+                max-width 50px
+                max-height 50px
+                width 100%
+                height auto
+                border-radius 50%
+                vertical-align top
+                border 3px solid white
+            p
+                padding 6px 3px
+                vertical-align middle
+                border-radius 5px
+                background pLeftColor
+                position absolute
+                left 20%
+                max-width 77%
+                display block
+                min-height auto
+                &:after
+                    content ''
+                    width 0
+                    height 0
+                    border-style solid
+                    border-width 3px 10px 7px 0
+                    border-color transparent white transparent transparent
+                    border-right-color pLeftColor
+                    position absolute
+                    left -8px
+            &.avatar_right
+                &.typing
+                    height 10px !important
+                    min-height 29px
+                    margin-top 0 !important
+                    min-heigh 40px
+                    opacity 0
+                    img
+                        top 0
+                        max-height 35px
+                        max-width 35px
+                    p
+                        font-size 13px
+                        padding 3px
+                        top 7%
+                p
+                    background pRightColor
+                    right 20%
+                    left initial
+                    max-width 77%
+                    &:after
+                        border-right-color pRightColor
+                        top 13%
+                        left 100%
+                        transform rotateY(180deg)
+                        transform rotateY(180deg)
+                img
+                    margin-left 81%
+    .bar-footer
+        overflow visible !important
+        textarea
+            resize none
+            height 25px
+    .footer-btn-wrap
+        position relative
+        height 100%
+        width 50px
+        top 7px
+    .footer-btn
+        position absolute !important
+        bottom 0
+    img
+        &.profile-pic
+            width 40px
+            height 40px
+            border-radius 50%
+            position absolute
+            bottom 10px
+            &.left
+                left 10px
+            &.right
+                right 10px
+
+.chat .chat-input-box .actions,.chat .chat-input-box input,.chat .chat-input-box .send
+    display inline-block
+    position absolute
+
+
+
+
+[data-hide="1"]  
+    opacity 0
+[data-hide="0"]
+    opacity 1  
+[data-hide]
+    transition all 1s
+
