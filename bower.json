@@ -1,7 +1,15 @@
 {
-  "name": "HelloIonic",
-  "private": "true",
+  "name": "fotogena",
+  "version": "0.0.0",
+  "dependencies": {
+    "angular": "~1.4.*",
+    "angular-animate": "~1.4.*",
+    "angular-material": "~0.10.0",
+    "angular-ui-router": "~0.2.10",
+    "ionic": "~1.1.0",
+    "svg-morpheus": "~0.1.8"
+  },
   "devDependencies": {
-    "ionic": "driftyco/ionic-bower#1.1.0"
+    "angular-mocks": "~1.4.*"
   }
 }

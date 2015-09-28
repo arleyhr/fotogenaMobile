@@ -1,6 +1,33 @@
-# Specifies intentionally untracked files to ignore when using Git
-# http://git-scm.com/docs/gitignore
+# Mac
+.DS_Store
 
-node_modules/
-platforms/
-plugins/
+# Win
+Thumbs.db
+ehthumbs.db
+
+#IntelliJ
+.idea
+
+#yeoman
+# node_modules
+node_modules
+report
+coverage
+build
+tmp
+
+# Log files
+*.log
+
+#bower_components
+bower_components
+
+### Node ###
+# Logs
+logs
+*.log
+
+# Runtime data
+pids
+*.pid
+*.seed
