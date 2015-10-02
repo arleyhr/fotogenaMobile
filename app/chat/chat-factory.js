@@ -8,7 +8,6 @@
    * @description
    *
    */
-   //una prueba amigo mio
   angular
     .module('chat')
     .factory('ChatService', ChatService);
