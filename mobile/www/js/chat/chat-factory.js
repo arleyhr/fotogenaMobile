@@ -17,20 +17,27 @@
     var ChatBase = {};
 
     ChatBase.openChat = function (cb){
-      $rootScope.chatificator.emit('openChat', $rootScope.auth_user.cod, 
+      $rootScope.chatificator.emit('openChat', $rootScope.auth_user.cod,
         function (chats) {
           cb(chats)
         });
     }
 
     ChatBase.openChats = function (chat, cb){
-
       var options = {
-        chat: chat.chat,
-         user: $rootScope.auth_user.cod
+        // chat: chat.chat,
+        iChat: chat.chat,
+        uss: chat.user2,
+        me: $rootScope.auth_user.cod
+        // user: $rootScope.auth_user.cod
        }
 
       $rootScope.chatificator.emit('chatCreate',options,function(data){
+
+        console.log(data)
+
+        $rootScope.messages[data.id] = data.data.msg
+
         cb(data)
       })
 
@@ -44,10 +51,11 @@
         userRep: '3546841' + options.id_user
       }
 
-      $rootScope.chatificator.emit('historychat', options, 
+      $rootScope.chatificator.emit('historychat', options,
         function (messages) {
+          console.log(messages)
           cb(messages)
-        }, 
+        },
       0)
 
     }
@@ -62,7 +70,7 @@
     ChatBase.createChat = function (options, cb){
 
       console.log(options)
-      
+
       this.open.verify(options.us, options.cod.substr(4)).then(function(){
 
         $rootScope.chatificator.emit('chatCreate', {
@@ -73,7 +81,7 @@
         })
 
       })
-      
+
     }
 
     ChatBase.open = {
@@ -133,4 +141,4 @@
   }
 }());
 
-//# sourceMappingURL=../chat/chat-factory.js.map
+//# sourceMappingURL=chat-factory.js.map

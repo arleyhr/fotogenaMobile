@@ -12,4 +12,4 @@
     ]);
 }());
 
-//# sourceMappingURL=../profile/profile-module.js.map
+//# sourceMappingURL=profile-module.js.map

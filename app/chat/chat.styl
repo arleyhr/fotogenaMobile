@@ -1,6 +1,9 @@
 pLeftColor = #d2ff52
 pRightColor = #34C6E0
 .chat
+    position absolute
+    height 100%
+    width 100%
     .messages-box
         height 94vh
     .chat-input-box
@@ -28,8 +31,9 @@ pRightColor = #34C6E0
             box-shadow 0 4px 9px #000000
             top -1px
     .messages
-        background #687586
         padding-top 15%
+        &.margin_bottom
+            margin-bottom 30% !important
         .message
             list-style none
             margin 4px 0
@@ -51,10 +55,11 @@ pRightColor = #34C6E0
                 vertical-align middle
                 border-radius 5px
                 background pLeftColor
-                position absolute
-                left 20%
+                margin-left 20%
                 max-width 77%
-                display block
+                position relative
+                display inline-block
+                text-align left
                 min-height auto
                 &:after
                     content ''
@@ -66,7 +71,9 @@ pRightColor = #34C6E0
                     border-right-color pLeftColor
                     position absolute
                     left -8px
+                    top 5%
             &.avatar_right
+                text-align right
                 &.typing
                     height 10px !important
                     min-height 29px
@@ -83,12 +90,14 @@ pRightColor = #34C6E0
                         top 7%
                 p
                     background pRightColor
-                    right 20%
+                    margin-right 20%
+                    margin-left 4% 
                     left initial
                     max-width 77%
+                    text-align left
                     &:after
                         border-right-color pRightColor
-                        top 13%
+                        top 5%
                         left 100%
                         transform rotateY(180deg)
                         transform rotateY(180deg)
@@ -98,7 +107,13 @@ pRightColor = #34C6E0
         overflow visible !important
         textarea
             resize none
-            height 25px
+            height 32px
+            display block
+            margin-left 10%
+            font-size 1.1em
+            padding .5em
+            margin-top 1px
+            width 80%
     .footer-btn-wrap
         position relative
         height 100%

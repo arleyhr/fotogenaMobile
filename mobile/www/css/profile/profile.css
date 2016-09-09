@@ -1,3 +1,7 @@
+.my-profile .legend-container {
+  margin: 0 10px;
+  margin-top: 13% !important;
+}
 .my-profile .profile-top {
   color: #fff;
   position: relative;
@@ -12,8 +16,9 @@
   position: absolute;
   border-radius: 50%;
   left: 5%;
-  top: 10%;
-  width: 25%;
+  top: 62%;
+  width: 20%;
+  z-index: 2;
 }
 .my-profile .profile-top .legend {
   color: #fff;
@@ -26,10 +31,19 @@
 }
 .my-profile .profile-top .name {
   color: #fff;
+  background: rgba(51,51,51,0.6);
+  border-radius: 6px;
+  padding: 0.1em 0.2em;
+  font: 20px sans-serif;
   position: absolute;
-  left: 32%;
-  top: 5%;
+  left: 26%;
+  bottom: -17px;
 }
 .my-profile .profile-top .name span {
   display: block;
+}
+.auto-80 {
+  margin: 0 auto;
+  margin-top: 15% !important;
+  width: 80% !important;
 }

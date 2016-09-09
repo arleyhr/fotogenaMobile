@@ -29,4 +29,4 @@
   }
 }());
 
-//# sourceMappingURL=../profile/profile-factory.js.map
+//# sourceMappingURL=profile-factory.js.map

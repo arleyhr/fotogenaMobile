@@ -12,4 +12,4 @@
     ]);
 }());
 
-//# sourceMappingURL=../chat/chat-module.js.map
+//# sourceMappingURL=chat-module.js.map

@@ -19,7 +19,7 @@
             <h1 class="title">Notificaciones</h1>
           </ion-header-bar>
         </ion-side-menu>
-        
+
         <ion-side-menu-content>
           <div data-ui-view>
 
@@ -32,7 +32,7 @@
           </ion-header-bar>
            <ion-content>
             <div class="list">
-                <a class="item item-avatar" ng-click="goToChat(conectado)" ng-repeat="conectado in conectados | orderBy:'nick'" ng-if="auth_user.nick != conectado.nick">
+                <a class="item item-avatar" on-tap="goToChat(conectado)" ng-repeat="conectado in conectados | orderBy:'nick'" ng-if="auth_user.nick != conectado.nick">
                   <img ng-src="{{URL+conectado.img}}">
                   <h2>{{conectado.nick}}</h2>
                   <p>{{conectado.fullName}}</p>
@@ -41,7 +41,8 @@
            </ion-content>
         </ion-side-menu>
       </ion-side-menus>
-    <script src="http://192.168.0.20:3000/socket.io/socket.io.js"></script>
+    <script src="http://fotogena.co/socket.io/socket.io.js"></script>
+    <script src="cordova.js"></script>
 
     <!-- bower:js -->
     <!-- endbower -->

@@ -16,4 +16,4 @@
   }
 }());
 
-//# sourceMappingURL=../profile/profile-routes.js.map
+//# sourceMappingURL=profile-routes.js.map

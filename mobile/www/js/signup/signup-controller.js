@@ -18,4 +18,4 @@
   }
 }());
 
-//# sourceMappingURL=../signup/signup-controller.js.map
+//# sourceMappingURL=signup-controller.js.map

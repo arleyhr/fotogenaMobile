@@ -18,4 +18,4 @@
   }
 }());
 
-//# sourceMappingURL=../my-profile/my-profile-controller.js.map
+//# sourceMappingURL=my-profile-controller.js.map

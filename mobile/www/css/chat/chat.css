@@ -1,3 +1,8 @@
+.chat {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+}
 .chat .messages-box {
   height: 94vh;
 }
@@ -28,8 +33,10 @@
   top: -1px;
 }
 .chat .messages {
-  background: #687586;
   padding-top: 15%;
+}
+.chat .messages.margin_bottom {
+  margin-bottom: 30% !important;
 }
 .chat .messages .message {
   list-style: none;
@@ -54,10 +61,11 @@
   vertical-align: middle;
   border-radius: 5px;
   background: #d2ff52;
-  position: absolute;
-  left: 20%;
+  margin-left: 20%;
   max-width: 77%;
-  display: block;
+  position: relative;
+  display: inline-block;
+  text-align: left;
   min-height: auto;
 }
 .chat .messages .message p:after {
@@ -70,6 +78,10 @@
   border-right-color: #d2ff52;
   position: absolute;
   left: -8px;
+  top: 5%;
+}
+.chat .messages .message.avatar_right {
+  text-align: right;
 }
 .chat .messages .message.avatar_right.typing {
   height: 10px !important;
@@ -90,13 +102,15 @@
 }
 .chat .messages .message.avatar_right p {
   background: #34c6e0;
-  right: 20%;
+  margin-right: 20%;
+  margin-left: 4%;
   left: initial;
   max-width: 77%;
+  text-align: left;
 }
 .chat .messages .message.avatar_right p:after {
   border-right-color: #34c6e0;
-  top: 13%;
+  top: 5%;
   left: 100%;
   -webkit-transform: rotateY(180deg);
           transform: rotateY(180deg);
@@ -111,7 +125,13 @@
 }
 .chat .bar-footer textarea {
   resize: none;
-  height: 25px;
+  height: 32px;
+  display: block;
+  margin-left: 10%;
+  font-size: 1.1em;
+  padding: 0.5em;
+  margin-top: 1px;
+  width: 80%;
 }
 .chat .footer-btn-wrap {
   position: relative;

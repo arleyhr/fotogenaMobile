@@ -1,21 +1,24 @@
 <ion-view title="Mi Perfil">
-    <ion-content class="my-profile" padding="false">
+    <ion-content class="my-profile" padding="false" style="background: {{profile.style}}">
         <header class="profile-top">
-            <img class="banner" ng-src="{{URL+profile.data.imgBanner}}" alt="">
+            <img class="banner" ng-src="{{URL+profile.data.bnDir}}" alt="">
             <img class="profile" ng-src="{{URL+profile.data.pDir}}" alt="" style="border-color:{{profile.data.color_leyenda}}">
             <h3 class="name" style="text-shadow:0 0 10px {{profile.data.color_leyenda}}">
-                @{{profile.data.nick}}
+                <!-- @{{profile.data.nick}} -->
                 <span>
                     {{profile.data.nombres}} {{profile.data.apellidos}}
                 </span>
             </h3>
-            <legend class="legend" style="text-shadow:0 0 10px {{profile.data.color_leyenda}}">{{profile.data.leyenda}}</legend>
         </header>
 
-        <div class="button-bar">
-            <button class="button button-stable button-block  icon-left ion-android-image">1</button>
-            <button class="button button-stable button-block  icon-left ion-android-contact">2</button>
-            <button class="button button-stable button-block  icon-left ion-android-contacts">3</button>
+        <div class="card legend-container" ng-if="profile.data.leyenda">
+          <div class="item item-text-wrap">
+            {{profile.data.leyenda}}
+          </div>
         </div>
+        <button class="button button-block button-positive auto-80" on-tap="profile.logout()">
+          Cerrar Sesión
+        </button>
+
     </ion-content>
 </ion-view>

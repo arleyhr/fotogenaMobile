@@ -12,26 +12,28 @@
     .module('login')
     .controller('LoginCtrl', LoginCtrl);
 
-  function LoginCtrl(urlBase, $rootScope, $http, LoginService) {
+  function LoginCtrl(urlBase, $rootScope, $http, LoginService, $ionicPopup) {
 
     var self = this;
 
-    this.login_data = {
-      user: 'fecace2',
-      password: '123456'
-    };
+    this.login_data = {};
 
     LoginService.getSession().then(function (response) {
 
       console.log(response)
 
       self.cookie = response.data
-      
+
       localStorage['cookie'] =response.data;
 
     });
 
     this.logear = function () {
+
+      if (self.joining) return
+
+
+      self.joining = true
 
       $rootScope.chatificator.emit('SessionStart', {
 
@@ -43,11 +45,12 @@
 
       }, function (a) {
 
+        self.joining = false
 
-        if (angular.equals(a.val, 1) || angular.equals(a.val, 2)) 
+        if (angular.equals(a.val, 1) || angular.equals(a.val, 2))
           $ionicPopup.alert({
             title: 'Usuario o Contraseña Incorrectos',
-            subTitle: 'Usuario o Contraseña Incorrectos .l.'
+            subTitle: 'Usuario o Contraseña Incorrectos'
           });
 
         else if (angular.equals(a.val, 3)) {
@@ -67,6 +70,6 @@
       });
 
     };
-    
+
   }
 }());

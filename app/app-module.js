@@ -7,9 +7,15 @@
    *
    */
 
-    function AppCtrl(urlBase, $rootScope, $ionicSideMenuDelegate, $location, $state, $filter, $ionicScrollDelegate, LoginService, ProfileService) {
+    function AppCtrl(urlBase, $rootScope, $ionicSideMenuDelegate, $location, $state, $filter, $ionicScrollDelegate, LoginService, ProfileService, $ionicPopup) {
 
       var app = this;
+
+      app.tempMessageID = ''
+
+      $rootScope.$on('notification', function(data){
+        alert(JSON.stringify(data))
+      })
 
 
       //Toggle Menus
@@ -20,7 +26,7 @@
         else if (a === 'left') $ionicSideMenuDelegate.toggleRight(true);
 
         else console.log('¿sidemenu?');
-        
+
       };
 
       //Handle connect || disconnect
@@ -57,23 +63,47 @@
         $ionicSideMenuDelegate.toggleRight();
 
         setTimeout(function () {
-          $state.go('chat', { nick: conectado.nick, id_user: conectado.us });
+          $state.go('chat', { nick: conectado.nick, id_user: conectado.us, iChat: conectado.iChat });
         }, 200);
 
       };
 
       $rootScope.listenMsg = function () {
 
-        $rootScope.chatificator.on('chat:' + $rootScope.auth_user.nick, function (msg) {
+        console.log('listening...', $rootScope.auth_user.nick)
 
-          $rootScope.tempChatImages[msg.nick] = msg.pDir
+        // $rootScope.chatificator.on('chatJoin:'+$rootScope.auth_user.nick, function(data){
+        // 	console.log(data, 'uyagefbrf')
+        // 	$rootScope.chatificator.emit('joinChat', data)
+        // 	// console.log(data)
+        //   $ionicScrollDelegate.$getByHandle('chatScroll').scrollBottom(true);
+        // })
 
-          if ($rootScope.messages[msg.nick])
-            $rootScope.messages[msg.nick].push(msg);
-          
-          else
-            $rootScope.messages[msg.nick] = msg;
-          
+        $rootScope.chatificator.on('readMsg', function (msg) {
+console.log(msg)
+
+
+
+          if (msg.id == app.tempMessageID) return
+
+          $rootScope.tempChatImages[msg.chat] = msg.pDir
+
+          if ($rootScope.messages[msg.chat]){
+
+            $rootScope.messages[msg.chat].push(msg);
+
+            app.tempMessageID = msg.id
+
+
+          }
+
+          else{
+            $rootScope.messages[msg.chat] = msg;
+
+            app.tempMessageID = msg.id
+
+          }
+
 
           $ionicScrollDelegate.$getByHandle('chatScroll').scrollBottom(true);
         });
@@ -83,6 +113,14 @@
 
     function RunApp ($ionicPlatform, $rootScope, $http, $state, urlBase, ProfileService, SocketFactory, LoginService ) {
 
+        
+
+
+        
+
+
+
+
         $rootScope.messages = [];
 
         $rootScope.tempChatImages = [];
@@ -90,7 +128,7 @@
         $rootScope.URL = urlBase;
 
         $rootScope.chatificator = new SocketFactory(urlBase+'/HistChat');
-        
+
         $rootScope.notificator = new SocketFactory(urlBase+'/notific');
 
         $rootScope.logged = false;
@@ -122,6 +160,22 @@
 
         $ionicPlatform.ready(function () {
 
+           
+
+
+           if (window.plugins && window.plugins.OneSignal){
+            window.plugins.OneSignal.init("7c18cf30-04c3-459b-9fb8-df42b192d5e0",
+                                   {googleProjectNumber: "78551362945"},
+                                   function(data){
+
+                                      $rootScope.$broadcast('notification', data)
+
+                                   });
+            
+              window.plugins.OneSignal.sendTag("developer", "true")
+
+            }
+
           if (window.cordova && window.cordova.plugins.Keyboard) cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
 
           if (window.StatusBar) StatusBar.styleDefault();
@@ -146,5 +200,5 @@
     .controller('AppCtrl', AppCtrl)
     .run(RunApp);
 
-    
+
 }());

@@ -12,9 +12,26 @@
     .module('chat')
     .controller('ChatCtrl', ChatCtrl);
 
+    
+
   function ChatCtrl($rootScope, $timeout, $state, $ionicScrollDelegate, $ionicSideMenuDelegate, $filter, ChatService) {
 
     var self = this;
+
+    var textarea = angular.element(document.querySelector('textarea'));
+
+    var messages_box = angular.element(document.querySelector('.messages'))
+
+
+    this.keepKeyboardOpen = function () {
+
+      textarea.one('blur', function() {
+
+        textarea[0].focus();
+
+      });
+    }
+
 
     this.typing
 
@@ -28,50 +45,79 @@
 
     this.nick = $state.params.nick;
 
-    ChatService.createChat(
-      {
-        us: self.id_user, 
-        cod: self.cod
-      },
-      function (response){
-        console.log(response)
+// { chat: 'user_273', user: '54871', nick: 'SonickSeven' }
+    // $rootScope.chatificator.emit('chatCreate',{
+    //     iChat: $state.params.iChat,
+    //     uss: self.id_user,
+    //     me: self.cod
+    //   },function(data){
+    //     console.log('hey!')
+    //     console.log(data)
+    //
+    //     $rootScope.messages[data.id] = data.data.msg
+    //
+    // })
 
-        ChatService.open.set(response.id);
+    $rootScope.chatificator.emit('chatCreate',{ chat: 'user_'+self.id_user, user: self.cod, nick: self.nick },function(data){
+        console.log('hey!')
+        console.log(data)
 
-        self.backgroundImage = response.data.optChat[0].bg
+        $rootScope.messages[data.id] = data.data.msg
 
-      }
-    )
+        self.idChat = data.id
 
-    ChatService.loadMessages(
-      {
-        
-        cod: self.cod, 
-        
-        nick: self.nick, 
+        self.backgroundImage = data.uss.bDir
 
-        id_user: self.id_user
+        self.scrollToBottom()
 
-      },
+    })
 
-      function (messages){
+    // ChatService.createChat(
+    //   {
+    //     iChat: $state.params.iChat,
+    //     uss: self.id_user,
+    //     me: self.cod
+    //   },
+    //   function (response){
+    //     console.log(response)
+    //
+    //     self.idChat = response.id
+    //
+    //     ChatService.open.set(response.id);
+    //
+    //     self.backgroundImage = response.uss.bDir
+    //
+    //   }
+    // )
 
-        var filter
-
-        $rootScope.messages[self.nick] = messages;
-        
-        filter = $filter('filter')($rootScope.messages[self.nick], {id_inicia: self.id_user})
-
-        $rootScope.tempChatImages[self.nick] = filter[filter.length-1].pDir
-
-        $timeout(function () {
-
-          $ionicScrollDelegate.$getByHandle('chatScroll').scrollBottom(true);
-
-        })
-    
-    });
-
+//     ChatService.loadMessages(
+//       {
+//
+//         cod: self.cod,
+//
+//         nick: self.nick,
+//
+//         id_user: self.id_user
+//
+//       },
+//
+//       function (messages){
+// console.log(messages)
+//         var filter
+//
+//         $rootScope.messages[self.nick] = messages || [];
+//
+//         filter = $filter('filter')($rootScope.messages[self.nick], {id_inicia: self.id_user})
+//
+//         $rootScope.tempChatImages[self.nick] = filter[filter.length-1].pDir
+//
+//         $timeout(function () {
+//
+//           $ionicScrollDelegate.$getByHandle('chatScroll').scrollBottom(true);
+//
+//         })
+//
+//     });
 
     $rootScope.chatificator.on('typing' + self.cod, function(a){
 
@@ -79,6 +125,19 @@
           self.workTyping()
 
     })
+
+    this.onFocus = function(){
+      $timeout(function(){
+        messages_box.classList.add('margin_bottom')
+      self.scrollToBottom()
+    }, 0)
+    }
+    this.onBlur = function(){
+      $timeout(function(){
+        messages_box.classList.remove('margin_bottom')
+        self.scrollToBottom()
+      }, 0)
+    }
 
     this.workTyping = function(){
 
@@ -92,21 +151,21 @@
         $timeout.cancel(self.typing);
 
       }
-        
+
       self.typing = $timeout(function(){
         var msgTag=document.querySelector('li.typing');
         msgTag.dataset.hide=1;
         //self.showTyping = false
 
         //self.scrollToBottom()
-        
+
       },1000);
     }
 
     this.emitTyping = function(){
 
         ChatService.typing({me: self.cod, you: self.id_user })
-      
+
 
     }
 
@@ -120,16 +179,25 @@
 
     }
 
+    console.log($rootScope.openedChats)
 
     this.sendMessage = function () {
 
-      if (self.message === '' || self.message === null) return;
+      self.keepKeyboardOpen();
+
+      if (self.message === '' || self.message === null || self.sending || !self.message) return;
+
+
+      self.sending = true
+
 
       $rootScope.chatificator.emit('mgss', {
 
-        usaer: '587458125487' + self.id_user,
+        // usaer: '587458125487' + self.id_user,
 
         me: {
+
+          pDir: $rootScope.auth_user.pDir,
 
           nick: self.auth_nick,
 
@@ -137,15 +205,31 @@
 
         },
 
+        chat: self.idChat,
+
+        device: 1,
+
         mens: self.message
 
       }, function (msg) {
+        console.log(msg)
 
-        $rootScope.messages[self.nick].push(msg);
 
+        if (!$rootScope.messages[msg.chat])
+          $rootScope.messages[msg.chat] = []
+
+        $rootScope.messages[msg.chat].push(msg);
         self.message = '';
 
-        $ionicScrollDelegate.$getByHandle('chatScroll').scrollBottom(true);
+        self.sending = false
+
+        $timeout(function() {
+
+          self.keepKeyboardOpen();
+          self.scrollToBottom()
+        }, 0);
+
+        
 
       });
 
@@ -155,4 +239,4 @@
 
 }());
 
-//# sourceMappingURL=../chat/chat-controller.js.map
+//# sourceMappingURL=chat-controller.js.map

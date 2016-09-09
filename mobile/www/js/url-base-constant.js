@@ -10,7 +10,7 @@
    */
   angular
     .module('fotogena')
-    .constant('urlBase', 'http://192.168.0.20:3000');
+    .constant('urlBase', 'https://fotogena.co');
 }());
 
 //# sourceMappingURL=url-base-constant.js.map
